@@ -1,0 +1,97 @@
+spring:
+  profiles:
+    active : @profileActive@
+
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/wallet_btc?characterEncoding=utf8&useSSL=false
+    username: root
+    password: 123456
+    # 使用druid数据源
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.jdbc.Driver
+    filters: stat
+    maxActive: 20
+    initialSize: 1
+    maxWait: 60000
+    minIdle: 1
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 300000
+    validationQuery: select 'x'
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxOpenPreparedStatements: 20
+
+  aop:
+    auto : true
+    proxy-target-class : true
+
+  tomcat:
+    http:
+      encoding:
+        force : true
+        charset : UTF-8
+        enabled : true
+
+  mvc:
+    favicon:
+      enabled : false
+
+  threadPool:
+    corePoolSize : 10
+    maxPoolSize : 100
+    queueCapacity : 50
+    keepAlive : 60
+    allowCoreThreadTimeOut : true
+
+  redis:
+    database : 0
+    host : 127.0.0.1
+    port : 6379
+    password : sacsacsac
+    timeout : 6000
+    #缓存过期时间
+    timeOutExpire : 60000
+    pool:
+      # 连接池最大连接数（使用负值表示没有限制）
+      max-active : 8
+      # 连接池最大阻塞等待时间（使用负值表示没有限制）
+      max-wait : -1
+      # 连接池中的最大空闲连接
+      max-idle : 8
+      # 连接池中的最小空闲连接
+      min-idle : 0
+  #rabbitm配置
+  application:
+    name: myRabbitmq
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5762
+    #如果是默认用户名~密码guest，自动注入
+    username: tiger
+    password: 123456
+    publisher-confirms: true
+    virtual-host: test
+
+mybatis:
+  mapper-locations : classpath*:mapping/*.xml
+  type-aliases-package : com.demo.model
+
+#server
+server:
+  port : 8080
+  context-path : /
+  tomcat:
+    uri-encoding : UTF-8
+    #ssl:
+      #key-store : classpath:keystore.p12
+      #key-store-password : 123456
+      #keyStoreType : PKCS12
+      #keyAlias : juzhen
+
+security:
+  oauth2:
+    resource:
+      filter-order: 3
+
